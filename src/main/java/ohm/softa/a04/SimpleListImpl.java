@@ -128,7 +128,7 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 		}
 	}
 
-	public void addDefault(){
-
+	public void addDefault(Class<T> clazz){
+		//add(clazz.newInstance());
 	}
 }
