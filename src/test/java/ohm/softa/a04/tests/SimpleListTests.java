@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Function;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -72,5 +74,25 @@ public class SimpleListTests {
 			int i = (int)o;
 			assertTrue(i % 2 == 0);
 		}
+	}
+
+	@Test
+	void testDefaultAdd() throws InstantiationException, IllegalAccessException {
+		SimpleList<String> testStringList = new SimpleListImpl<>();
+		testStringList.addDefault(String.class);
+		int counter = 0;
+		for(Object o : testStringList){
+			counter++;
+		}
+		assertEquals(1, counter);
+	}
+
+	@Test
+	void testMap(){
+		SimpleList<String> testStringList = new SimpleListImpl<>();
+		testStringList.add("69");
+		Function<String, Integer> f = Integer::parseInt;
+		SimpleList<Integer> resultList = testStringList.map(f);
+		assertEquals(resultList.size(), 1);
 	}
 }

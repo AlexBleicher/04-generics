@@ -46,29 +46,20 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 	 * @param filter SimpleFilter instance
 	 * @return new SimpleList instance
 	 */
-	public SimpleList<T> filter(SimpleFilter<T> filter){
-		SimpleList<T> result = new SimpleListImpl<>();
-		for(Object o: this){
-			if(filter.include(o)){
-				result.add((T) o);
-			}
-		}
-		return result;
-	}
 
 	/**
 	 * @inheritDoc
 	 */
 	@Override
 	public Iterator<T> iterator() {
-		return new SimpleIterator<T>();
+		return new SimpleIterator();
 	}
 
 	/**
 	 * Helper class which implements the Iterator interface
 	 * Has to be non static because otherwise it could not access the head of the list
 	 */
-	private class SimpleIterator<K> implements Iterator<T> {
+	private class SimpleIterator implements Iterator<T> {
 
 		private ListElement<T> current = head;
 
@@ -126,9 +117,5 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 		public void setNext(ListElement<T> next) {
 			this.next = next;
 		}
-	}
-
-	public void addDefault(Class<T> clazz){
-		//add(clazz.newInstance());
 	}
 }
